@@ -16,11 +16,7 @@ The dataset used is Kraken's historical OHLCVT data for the ETH/USD trading pair
 
 ## Methodology
 
-The CSV file was imported into R and its Unix timestamps were converted to UTC dates. The data was filtered to the requested assessment window and sorted by timestamp. Log returns were calculated from consecutive closing prices using:
-
-\[
-r_t = \ln\left(\frac{P_t}{P_{t-1}}\right)
-\]
+The CSV file was imported into R and its Unix timestamps were converted to UTC dates. The data was filtered to the requested assessment window and sorted by timestamp. Log returns were calculated from consecutive closing prices.
 
 Only returns for which consecutive records were exactly 300 seconds (five minutes) apart were retained. This resulted in 998,244 valid five-minute returns.
 
