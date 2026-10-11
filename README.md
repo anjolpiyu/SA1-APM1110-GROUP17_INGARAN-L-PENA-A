@@ -1,3 +1,62 @@
+# Part II, Item 1: Bitcoin Return Distribution Fitting
+
+## Objective
+
+To determine which probability distribution best fits the one-minute returns of Bitcoin quoted in United States dollars (BTC/USD) from January 1, 2012, to September 15, 2026.
+
+## Data Source
+- Cryptocurrency: Bitcoin (BTC/USD)
+- Data interval: One minute
+- Requested period: January 1, 2012 – September 15, 2026
+- Data provider: Bitstamp
+- Historical data repository: https://ff137.github.io/bitstamp-btcusd-minute-data/
+- Reference article: https://medium.com/analytics-vidhya/modelling-bitcoin-returns-e6c3d286c00f
+
+The actual available date range must be verified from the downloaded dataset before reporting the final results.
+
+## Methodology
+
+The analysis was conducted using R. The midpoint price was calculated using the average of the high and low prices:
+
+M(t) = [High(t) + Low(t)] / 2
+|
+Simple returns were calculated from consecutive midpoint prices:
+
+R(t) = [M(t) - M(t-1)] / M(t-1)
+
+Four candidate probability distributions were fitted to the returns:
+
+1. Normal distribution
+2. Student's t-distribution
+3. Laplace distribution
+4. Logistic distribution
+
+The fitted distributions were compared using the Kolmogorov–Smirnov (KS) distance. The distribution with the smallest KS distance was ranked as the best fit among the candidates tested.
+
+## Results
+
+The current results table ranks the Student's t-distribution first, with a KS distance of 0.091298. The Laplace, Logistic, and Normal distributions follow, with KS distances of 0.098125, 0.122429, and 0.208609, respectively.
+
+These values are descriptive goodness-of-fit comparisons. They are not formal significance-test results.
+
+## Interpretation
+
+Among the four candidate distributions, the Student's t-distribution has the smallest KS distance and provides the closest empirical fit according to the selected comparison criterion. This is consistent with the possibility of heavier tails in financial returns. However, the fitted degrees of freedom are close to the lower bound imposed by the estimation procedure, so the parameter estimate requires further checking.
+
+## Files
+- code/bitcoin_return_distribution_fit.R – R source code
+- results/btc_distribution_fit_results.csv – Distribution ranking and estimated parameters
+- results/btc_returns_fitted_distributions.png – Histogram and fitted density curves
+- results/btc_returns_cdf_comparison.png – Empirical and fitted cumulative distribution functions
+
+## Reproducibility
+
+Run the R script in RStudio with an internet connection. Install the required packages if they are not already installed. The script downloads the source data, calculates returns, fits the candidate distributions, and generates the results table and plots.
+
+## Limitations
+
+The findings depend on the available dataset, data quality, return definition, candidate distributions, and parameter-fitting procedure. Missing minute-level observations and the treatment of zero returns may affect the results. The reported date coverage must be checked before drawing conclusions about the entire requested period.
+
 # Section II, Part 2: Shapiro–Wilk Normality Test for Ethereum Returns
 
 ## Objective
