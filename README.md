@@ -52,14 +52,10 @@ The Shapiro–Wilk test produced a statistic of W = 0.64407 and a p-value below 
 
 ## Graphs and Output Files
 
-After running the R script, include these generated files in the repository:
-
 - `eth_shapiro_results.csv` — statistical results table
 - `eth_shapiro_report.txt` — text summary of the test and interpretation
 - `eth_returns_histogram.png` — histogram of sampled log returns
 - `eth_returns_qqplot.png` — normal Q–Q plot of sampled log returns
-
-If your repository uses folders, you may place the plots in a `plots/` folder and the result files in an `outputs/` folder. Update the links or image paths in this README accordingly.
 
 ## Limitation
 
