@@ -9,12 +9,11 @@ get_nums <- function(prompt) {
 # Question 1: probability a product is defective
 
 question1 <- function() {
-  # keep asking until the x values are valid
   ok <- FALSE
   while (ok == FALSE) {
     x <- as.numeric(strsplit(readline("Enter x1 x2 x3 (e.g. 0.3 0.4 0.3 or 30 40 30 for percent): "), " ")[[1]])
     if (any(x > 1)) {
-      x <- x / 100   # user typed percentages
+      x <- x / 100   
     }
     if (length(x) != 3) {
       print("Please enter exactly 3 values")
@@ -27,7 +26,6 @@ question1 <- function() {
     }
   }
   
-  # same for the y values
   ok <- FALSE
   while (ok == FALSE) {
     y <- as.numeric(strsplit(readline("Enter y1 y2 y3 (e.g. 0.03 0.04 0.05 or 3 4 5 for percent): "), " ")[[1]])
@@ -45,7 +43,6 @@ question1 <- function() {
     }
   }
   
-  # total probability: P(D) = x1*y1 + x2*y2 + x3*y3
   pd <- sum(x * y)
   cat("P(defective) =", pd, "\n")
   return(pd)
@@ -57,7 +54,6 @@ univariate <- function() {
   x <- as.numeric(strsplit(readline("Enter the values of X separated by spaces: "), " ")[[1]])
   p <- as.numeric(strsplit(readline("Enter the probabilities separated by spaces: "), " ")[[1]])
   
-  # validity checks
   if (length(x) != length(p)) {
     print("Error: need the same number of values and probabilities")
     return(NULL)
@@ -71,7 +67,6 @@ univariate <- function() {
     return(NULL)
   }
   
-  # sort so the cdf works properly
   o <- order(x)
   x <- x[o]
   p <- p[o]
@@ -81,7 +76,6 @@ univariate <- function() {
   cat("Mean =", mean_x, "\n")
   cat("Variance =", var_x, "\n")
   
-  # plot pdf and cdf
   par(mfrow = c(1, 2))
   plot(x, p, type = "h", main = "PDF", xlab = "x", ylab = "P(X = x)")
   plot(x, cumsum(p), type = "s", main = "CDF", xlab = "x", ylab = "P(X <= x)")
@@ -95,7 +89,6 @@ bivariate <- function() {
   x <- as.numeric(strsplit(readline("Enter the values of X separated by spaces: "), " ")[[1]])
   y <- as.numeric(strsplit(readline("Enter the values of Y separated by spaces: "), " ")[[1]])
   
-  # joint probability table, one row per x value
   joint <- matrix(0, nrow = length(x), ncol = length(y))
   for (i in 1:length(x)) {
     cat("Row for X =", x[i], "\n")
@@ -104,7 +97,6 @@ bivariate <- function() {
   rownames(joint) <- paste("X=", x, sep = "")
   colnames(joint) <- paste("Y=", y, sep = "")
   
-  # validity checks
   if (any(joint < 0) || any(joint > 1)) {
     print("Error: probabilities must be between 0 and 1")
     return(NULL)
@@ -115,7 +107,6 @@ bivariate <- function() {
   }
   print(joint)
   
-  # marginal distributions
   px <- rowSums(joint)
   py <- colSums(joint)
   cat("\nMarginal of X:\n")
@@ -125,7 +116,6 @@ bivariate <- function() {
   print(py)
   cat("Mean of Y =", sum(y * py), " Variance of Y =", sum(y^2 * py) - sum(y * py)^2, "\n")
   
-  # conditional distributions of Y given each X
   for (i in 1:length(x)) {
     cond <- joint[i, ] / px[i]
     m <- sum(y * cond)
@@ -135,7 +125,6 @@ bivariate <- function() {
     cat("Mean =", m, " Variance =", v, "\n")
   }
   
-  # conditional distributions of X given each Y
   for (j in 1:length(y)) {
     cond <- joint[, j] / py[j]
     m <- sum(x * cond)
@@ -145,7 +134,6 @@ bivariate <- function() {
     cat("Mean =", m, " Variance =", v, "\n")
   }
   
-  # plots of the marginals (pdf and cdf)
   par(mfrow = c(2, 2))
   ox <- order(x)
   oy <- order(y)
@@ -158,7 +146,6 @@ bivariate <- function() {
 
 
 # Question 3: search engine simulation
-
 question3 <- function() {
   p <- as.numeric(readline("Enter p (probability a site has the key phrase, e.g. 0.6): "))
   if (p <= 0 || p > 1) {
@@ -169,7 +156,6 @@ question3 <- function() {
   n <- 10000
   searches <- rep(0, n)
   
-  # simulate: keep going through sites until the phrase is found
   for (i in 1:n) {
     count <- 1
     while (runif(1) > p) {
@@ -178,7 +164,6 @@ question3 <- function() {
     searches[i] <- count
   }
   
-  # simulated pdf, mean and variance
   pdf <- table(searches) / n
   cat("Simulated mean =", mean(searches), " (theory 1/p =", 1 / p, ")\n")
   cat("Simulated variance =", var(searches), " (theory (1-p)/p^2 =", (1 - p) / p^2, ")\n")
@@ -187,8 +172,7 @@ question3 <- function() {
   plot(as.numeric(names(pdf)), as.numeric(pdf), type = "h",
        main = "Simulated PDF", xlab = "Number of searches", ylab = "Probability")
   
-  # conditional distribution given 3 failed searches (X > 3)
-  # the number of extra searches needed is X - 3
+
   extra <- searches[searches > 3] - 3
   cpdf <- table(extra) / length(extra)
   cat("\nConditional on X > 3 (", length(extra), "cases )\n")
@@ -200,7 +184,6 @@ question3 <- function() {
        main = "Conditional PDF (X-3 given X>3)", xlab = "Extra searches", ylab = "Probability")
   par(mfrow = c(1, 1))
   
-  # Markov (memoryless) property checks
   a_cond <- sum(searches == 4) / sum(searches > 3)
   a_uncond <- sum(searches == 1) / n
   b_cond <- sum(searches == 5) / sum(searches > 3)
@@ -209,3 +192,4 @@ question3 <- function() {
   cat("(b) P(X=5 | X>3) =", b_cond, "  P(X=2) =", b_uncond, "\n")
   cat("The pairs are close, so the memoryless property holds.\n")
 }
+
