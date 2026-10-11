@@ -1,0 +1,17 @@
+SECTION II, PART 2: SHAPIRO-WILK NORMALITY TEST
+Asset: Ethereum (ETH/USD)
+Requested period: 2015-08-07 through 2026-09-15
+Available period in filtered file: 2015-08-07 through 2026-06-30
+Valid exact five-minute returns: 998244
+Observations tested: 5000
+W statistic: 0.6440712
+p-value: < 2.2e-16
+Significance level: 0.05
+H0: The sampled log returns follow a normal distribution.
+H1: The sampled log returns do not follow a normal distribution.
+Decision: Reject the null hypothesis of normality
+Interpretation: Because the p-value is below 0.05, reject the null hypothesis. The sampled Ethereum five-minute log returns show strong evidence of departure from a normal distribution.
+
+Limitation: The available Kraken dataset ends on 2026-06-30, before the
+requested end date of 2026-09-15. The analysis therefore applies only to
+the available observation period and does not include the missing dates.
