@@ -8,10 +8,13 @@ The objective of this analysis is to test whether Ethereum (ETH/USD) five-minute
 
 The dataset used is Kraken's historical OHLCVT data for the ETH/USD trading pair. OHLCVT data contains timestamp, open, high, low, close, volume, and trade-count fields.
 
+- **Dataset:** Kraken ETH/USD five-minute OHLCVT historical data
 - **Source:** [Kraken downloadable historical OHLCVT data](https://support.kraken.com/in/articles/360047124832-downloadable-historical-ohlcvt-open-high-low-close-volume-trades-data)
 - **Local data file:** `ETHUSD_5.csv`
 - **Requested assessment period:** August 7, 2015, to September 15, 2026
 - **Available data period:** August 7, 2015, to June 30, 2026
+
+Note: The raw CSV file is stored locally and is not included in this repository because of its large file size. It can be obtained from the source linked above.
 
 ## Methodology
 
