@@ -1,0 +1,5 @@
+Rank,Distribution,Parameters,KS_D
+1,Student-t,location=3.0215e-06; scale=0.000331759; df=2,0.0912984160725234
+2,Laplace,location=0; scale=0.000551597,0.0981250957907333
+3,Logistic,location=3.3162e-06; scale=0.000436061,0.122428770065506
+4,Normal,mean=2.26107e-06; sd=0.00142613,0.208608841410825
