@@ -57,7 +57,7 @@ Run the R script in RStudio with an internet connection. Install the required pa
 
 The findings depend on the available dataset, data quality, return definition, candidate distributions, and parameter-fitting procedure. Missing minute-level observations and the treatment of zero returns may affect the results. The reported date coverage must be checked before drawing conclusions about the entire requested period.
 
-# Section II, Part 2: Shapiro–Wilk Normality Test for Ethereum Returns
+# Part II, Item 2: Shapiro–Wilk Normality Test for Ethereum Returns
 
 ## Objective
 
