@@ -1,20 +1,7 @@
-# Probability & Probability Distributions Assignment
-
-**Course:** Probability & Probability Distributions
-**Language:** R (run in RStudio)
-
-## Repository contents
-
-| File / Folder | Description |
-|---|---|
-| `probability_assignment.R` | R code for Section I (items 1 to 3) |
-| `outputs/` | Console output screenshots for each test run |
-| `plots/` | PDF and CDF plots produced by the programs |
-| `README.md` | This file |
 
 ## How to run
 
-1. Open `probability_assignment.R` in RStudio and click **Source**.
+1. Open `PART1_SA1.R` in RStudio and click **Source**.
 2. In the **Console**, call one of the functions below and type the inputs when prompted. Separate numbers with spaces.
 
 | Function | Item |
